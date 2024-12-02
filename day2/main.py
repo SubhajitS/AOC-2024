@@ -8,23 +8,15 @@ def readinput() -> list:
     return reports
 
 def isSafe(report: list) -> bool:
-    flag = 0
-    if report[0] > report[1] and report[0]-report[1] >= 1 and report[0]-report[1] <= 3 :
-        flag = -1
-    elif report[0] < report [1] and report[1]-report[0] >= 1 and report[1]-report[0] <= 3:
-        flag = 1
-    else:
-        return False
-
-    for i in range(1, len(report)-1):
-        if report[i] > report[i+1] and flag == -1 and report[i]-report[i+1] >= 1 and report[i]-report[i+1] <= 3:
-            continue
-        elif report[i] < report [i+1] and flag == 1 and report[i+1]-report[i] >= 1 and report[i+1]-report[i] <= 3:
-            continue
+    sum = 0
+    for i in range(len(report)-1):
+        if report[i] - report[i+1] >=1 and report[i] - report[i+1] <=3:
+            sum -= 1
+        elif report[i+1] - report[i] >=1 and report[i+1] - report[i] <=3:
+            sum += 1
         else:
-            return False
-    return True
-
+            continue
+    return abs(sum) == len(report) -1
 
 if __name__ == "__main__":
     reports = readinput()
