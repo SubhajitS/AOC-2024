@@ -1,5 +1,5 @@
 def readinput() -> list:
-    inputfile = open("/Users/subhajitsaha/Projects/p2p-demo/aoc/day2/input.txt", "r")
+    inputfile = open("./input.txt", "r")
     reports=[]
     for line in inputfile.readlines():
         numbers = line.rstrip('\n').split(" ")
