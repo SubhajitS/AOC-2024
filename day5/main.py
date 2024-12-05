@@ -29,10 +29,21 @@ def isvalid(update: list) -> bool:
                     return False
     return True
 
+def correctorder(update):
+    for i in range(len(update)):
+        for j in range(i+1, len(update)):
+            if update[j] in orders:
+                if update[i] in orders[update[j]]:
+                    temp=update[i]
+                    update[i]=update[j]
+                    update[j]=temp
+
 if __name__ == "__main__":
     readinput()
     sum = 0
     for update in updates:
-        if isvalid(update):
+        if not isvalid(update):
+            correctorder(update)
+            print(update)
             sum += update[int(len(update)/2)]
     print(sum)
