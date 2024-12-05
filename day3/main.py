@@ -15,9 +15,12 @@ def calculate(instruction: str) -> int:
         sum+=int(nums[0])*int(nums[1])
     return sum
 
+def removeDisabled(instruction: str) -> str:
+    return re.sub(r'don\'t\(\).*?(?:do\(\)|$)', "", instruction)
+
 if __name__ == "__main__":
-    result=0
-    for instruction in readinput():
-        result += calculate(instruction)
+    instruction = "".join([input.rstrip("\n") for input in readinput()])
+    activeInstruction = removeDisabled(instruction)
+    result = calculate(activeInstruction)
     print(result)
     
