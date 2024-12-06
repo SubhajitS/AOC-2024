@@ -1,5 +1,7 @@
 mat=[]
 validwords=['XMAS', 'SAMX']
+validMAS=['MAS', 'SAM']
+
 def readinput():
     file = open("./input.txt", "r")
     for line in file.readlines():
@@ -49,8 +51,17 @@ def checkdiagonal(i: int, j: int, height: int, width: int, validIndexes: list) -
                 count += 1
     return count
 
-if __name__ == "__main__":
-    readinput()
+def check_x_mas(i: int, j: int, height: int, width: int) -> int:
+    count = 0
+    if i+2<height:
+        if j+2<width:
+            backsegment=mat[i][j]+mat[i+1][j+1]+mat[i+2][j+2]
+            frontsegment=mat[i][j+2]+mat[i+1][j+1]+mat[i+2][j]
+            if backsegment in validMAS and frontsegment in validMAS:
+                count += 1
+    return count
+
+def prob1():
     height=len(mat)
     width=len(mat[0])
     count = 0
@@ -60,4 +71,19 @@ if __name__ == "__main__":
             count += checkhorizontal(i, j, width, validIndexes)
             count += checkvertical(i, j, height, validIndexes)
             count += checkdiagonal(i, j, height, width, validIndexes)
-    print(count)
+    print("Answer for problem 1: {}".format(count))
+
+def prob2():
+    height=len(mat)
+    width=len(mat[0])
+    count = 0
+    validIndexes = []
+    for i in range(height):
+        for j in range(width):
+            count += check_x_mas(i, j, height, width)
+    print("Answer for problem 2: {}".format(count))
+
+if __name__ == "__main__":
+    readinput()
+    prob1()
+    prob2()
